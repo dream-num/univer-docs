@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import JSPlayground from '../JSPlayground/index'
 import styles from './index.module.less'
 
 interface IEmbedProps {
@@ -85,13 +86,19 @@ export function Demo(props: IProps) {
       </aside>
 
       <main className={styles.main}>
-        <iframe
-          className={styles.iframe}
-          allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-          sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-          title={activeDemo?.title}
-          src={activeDemo?.src}
-        />
+        {
+          acteiveDemo?.type === 'jsPlayground'
+            ? <JSPlayground />
+            : (
+<iframe
+  className={styles.iframe}
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  title={activeDemo?.title}
+  src={activeDemo?.src}
+/>
+              )
+        }
       </main>
     </section>
   )
